@@ -1,0 +1,12 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: xmodel.generation.mean
+Bundle-Version: 1.0.0.qualifier
+Bundle-SymbolicName: xmodel.generation.mean;singleton:=true
+Bundle-ActivationPolicy: lazy
+Require-Bundle: 
+ xmodel, xmodel.dsl
+Import-Package: org.apache.log4j,
+ org.eclipse.xtext.xbase.lib
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+Export-Package: xmodel.generator.mean

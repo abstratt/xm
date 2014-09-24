@@ -1,0 +1,89 @@
+package xmbase
+
+import org.eclipse.emf.common.util.DelegatingEList.UnmodifiableEList
+
+class TopLevel extends Namespace {
+}
+
+class Namespace extends NamedElement {
+	contains NamedElement[] children opposite parent
+}
+
+class NamedElement {
+	container Namespace[0..1] parent opposite children
+	String name
+}
+
+class Model extends Namespace {
+	contains derived TopLevel[*] topLevelElements get {
+		new UnmodifiableEList(children.filter[it|it instanceof TopLevel].toList())
+	}
+}
+
+class Operation extends ClassFeature, ParameteredElement  {
+	op Behavior parameteredBehavior() { behavior }
+	contains Behavior[0..1] behavior
+}
+
+abstract class Behavior {
+}
+
+abstract class ClassFeature extends TypedElement {
+}
+
+class Attribute extends ClassFeature {
+}
+
+abstract class LocalData extends TypedElement {
+	op Behavior context()
+}
+
+class ParameteredElement {
+	contains Parameter[*] parameters opposite parametered
+	op Behavior parameteredBehavior()
+}
+
+class Parameter extends LocalData {
+	ParameterDirection direction
+	container ParameteredElement parametered opposite parameters
+	op Behavior context() {
+		parametered.parameteredBehavior
+	}
+}
+
+enum ParameterDirection {
+	In
+	, Out
+	, InOut
+}
+
+class TypedElement extends NamedElement {
+	refers Type elementType
+	boolean required
+	boolean multivalued
+}
+
+class Type extends NamedElement, TopLevel{
+}
+
+class Primitive extends Type {
+}
+
+class Class extends Type {
+	contains ClassFeature[*] features
+	refers derived Operation[*] operations get {
+		new UnmodifiableEList(features.filter[it|it instanceof Operation].toList())
+	}
+	refers derived Attribute[*] attributes get {
+		new UnmodifiableEList(features.filter[it|it instanceof Attribute].toList())
+	}
+}
+
+class Association {
+	contains AssociationRole[1..2] roles opposite association
+}
+
+class AssociationRole extends TypedElement {
+	container Association association opposite roles
+}
+

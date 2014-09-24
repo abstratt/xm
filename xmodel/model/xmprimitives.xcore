@@ -1,0 +1,33 @@
+package xmprimitives
+
+import xmbase.Primitive
+import org.eclipse.emf.ecore.xml.^type.Date
+import java.math.BigDecimal
+
+class StringType extends Primitive {
+	String value
+}
+
+class BooleanType extends Primitive {
+	boolean value
+}
+
+class IntegerType extends Primitive {
+	int value
+}
+
+class FloatType extends Primitive {
+	double value
+}
+
+class DateType extends Primitive {
+	Date value
+}
+
+class DecimalType extends Primitive {
+	BigDecimal value
+}
+
+class MemoType extends Primitive {
+	String value
+}

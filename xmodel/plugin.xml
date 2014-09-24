@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+-->
+
+<plugin>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated state -->
+      <package
+            uri="xmodel.state"
+            class="xmodel.state.StatePackage"
+            genModel="model/state.xcore"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated base -->
+      <package
+            uri="xmodel.base"
+            class="xmodel.base.BasePackage"
+            genModel="model/base.xcore"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated activity -->
+      <package
+            uri="xmodel.behavior"
+            class="xmodel.behavior.BehaviorPackage"
+            genModel="model/activity.xcore"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated xmodel -->
+      <package
+            uri="xmodel.complete"
+            class="xmodel.complete.CompletePackage"
+            genModel="model/xmodel.xcore"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated xmbase -->
+      <package
+            uri="xmbase"
+            class="xmbase.XmbasePackage"
+            genModel="model/xmbase.xcore"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated xmbehavior -->
+      <package
+            uri="xmbehavior"
+            class="xmbehavior.XmbehaviorPackage"
+            genModel="model/xmbehavior.xcore"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated xmstate -->
+      <package
+            uri="xmstate"
+            class="xmstate.XmstatePackage"
+            genModel="model/xmstate.xcore"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated xmcomplete -->
+      <package
+            uri="xmcomplete"
+            class="xmcomplete.XmcompletePackage"
+            genModel="model/xmcomplete.xcore"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated xmprimitives -->
+      <package
+            uri="xmprimitives"
+            class="xmprimitives.XmprimitivesPackage"
+            genModel="model/xmprimitives.xcore"/>
+   </extension>
+
+</plugin>

@@ -1,0 +1,191 @@
+package xmbehavior
+
+import xmbase.Attribute
+import xmbase.NamedElement
+import xmbase.Operation
+import xmbase.Behavior
+import xmbase.LocalData
+import xmbase.ParameteredElement
+import xmbase.Parameter
+import xmbase.AssociationRole
+ 
+class Activity extends Behavior {
+	contains Variable[] variables opposite activity
+	contains Block block
+}
+
+abstract class Action extends NamedElement{
+}
+
+class Block extends StatementAction {
+	contains Action[] actions
+}
+
+class LiteralClosure extends Activity, ParameteredElement, LiteralAction {
+}
+
+class ClosureParameter extends Parameter {
+	
+}
+
+abstract class ValueAction extends Action {
+	
+}
+
+abstract class ExpressionAction extends ValueAction {
+	
+}
+
+abstract class SimpleValueAction extends ValueAction {
+	
+}
+
+
+abstract class StatementAction extends Action {
+}
+
+abstract class ObjectStatementAction extends StatementAction, ObjectAction {
+}
+
+abstract class LiteralAction extends SimpleValueAction  {
+	
+}
+
+class LiteralDoubleAction extends LiteralAction {
+	double value
+}
+
+class LiteralIntAction extends LiteralAction {
+	int value
+}
+
+class LiteralStringAction extends LiteralAction {
+	String value
+}
+
+class LiteralMapAction extends LiteralAction {
+	contains LiteralMapEntry[*] entries
+}
+
+class LiteralCollectionAction extends LiteralAction, CollectionProducingAction {
+	contains ValueAction[*] values
+}
+
+class LiteralMapEntry {
+	String name
+	contains ValueAction value
+}
+
+class LiteralBooleanAction extends LiteralAction {
+	boolean value
+}
+
+class ReadSelfAction extends SimpleValueAction {
+}
+
+
+abstract class ObjectAction extends Action {
+	contains ValueAction target
+}
+
+abstract class NonObjectAction extends Action {
+}
+
+abstract class AttributeAction extends ObjectAction {
+	refers Attribute attribute
+}
+
+class ReadAttributeAction extends AttributeAction, ExpressionAction {
+}
+
+class WriteAttributeAction extends AttributeAction, ObjectStatementAction {
+	contains ValueAction value
+}
+
+class Variable extends LocalData {
+	container Activity activity opposite variables
+	op Behavior context() { activity }
+}
+
+abstract class LocalDataAction extends ObjectAction {
+	refers LocalData localData
+}
+class ReadLocalDataAction extends LocalDataAction, SimpleValueAction {
+}
+
+class WriteLocalDataAction extends LocalDataAction, StatementAction {
+	contains ValueAction value
+}
+
+class CreateObjectAction extends SimpleValueAction {
+	refers xmbase.Class ^class
+	contains ValueAction[*] arguments
+}
+
+abstract class OperationAction extends ObjectAction {
+	refers Operation operation
+	contains ValueAction[*] arguments
+}
+
+class CallActionAction extends OperationAction, ObjectStatementAction {
+}
+
+class CallQueryAction extends OperationAction, ExpressionAction {
+}
+
+class FinalAction extends StatementAction {
+	contains ValueAction[0..1] resultValue
+}
+
+abstract class CollectionProducingAction extends Action {
+}
+
+abstract class OriginalCollectionProducingAction extends CollectionProducingAction {
+}
+
+abstract class CollectionConsumingAction extends Action {
+}
+
+abstract class CollectionTransformingAction extends CollectionConsumingAction, CollectionProducingAction {
+}
+
+abstract class FinalCollectionConsumingAction extends CollectionConsumingAction {
+}
+
+class TraverseManyAction extends OriginalCollectionProducingAction {
+	contains ValueAction target
+	refers AssociationRole end
+}
+
+class ExtentAction extends OriginalCollectionProducingAction {
+	refers xmbase.Class ^class
+}
+
+class FilterAction extends CollectionTransformingAction {
+	contains LiteralClosure filter 
+}
+
+class MapAction extends CollectionTransformingAction {
+	contains LiteralClosure mapper
+}
+
+class ReduceAction extends FinalCollectionConsumingAction, SimpleValueAction {
+	contains LiteralClosure reducer
+	contains ValueAction initial
+}
+
+class ApplyAction extends FinalCollectionConsumingAction, StatementAction {
+	contains LiteralClosure applier
+}
+
+class CollectionExpressionAction extends ValueAction {
+	contains OriginalCollectionProducingAction source
+	contains CollectionTransformingAction[*] transformers
+	contains FinalCollectionConsumingAction destination 
+}
+
+class CollectionStatement extends StatementAction {
+	contains OriginalCollectionProducingAction source
+	contains CollectionTransformingAction[*] transformers
+	contains FinalCollectionConsumingAction destination 
+}

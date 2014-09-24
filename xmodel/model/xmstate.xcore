@@ -1,0 +1,29 @@
+package xmstate
+
+import xmbase.NamedElement
+import xmbase.Namespace
+
+class StateMachine extends Namespace {
+    contains State[] states	
+}
+
+class State extends Namespace {
+	contains Transition[] outgoing opposite source
+	refers Transition[] incoming
+}
+
+class Transition extends NamedElement {
+	container State source opposite outgoing
+	refers State target
+	contains Condition guard 
+}
+
+class Trigger {
+	
+}
+
+class Condition {
+	
+}
+
+
