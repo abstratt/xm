@@ -10,4 +10,4 @@ Key characteristics:
 Status
 ------
 
-Development just started. Your participation is welcome.
+This thing has just started. Your participation is welcome.
