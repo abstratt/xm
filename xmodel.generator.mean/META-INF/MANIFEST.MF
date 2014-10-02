@@ -1,7 +1,8 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: xmodel.generation.mean
-Bundle-Version: 1.0.0.qualifier
+Bundle-Vendor: XM contributors
+Bundle-Version: 0.1.0.qualifier
 Bundle-SymbolicName: xmodel.generation.mean;singleton:=true
 Bundle-ActivationPolicy: lazy
 Require-Bundle: 
